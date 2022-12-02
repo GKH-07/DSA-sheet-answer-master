@@ -1,0 +1,23 @@
+void fnc(Node* root, queue<Node*> &queue, vector<int> &res){
+    
+    if(root == NULL)return;
+    res.push_back(root->data);
+    if(root->left)queue.push(root->left);
+    
+    fnc(root->right, queue, res);
+    
+}
+
+vector<int> diagonal(Node *root)
+{   
+    vector<int> res;
+    if(root == NULL)return res;
+    queue<Node*> q;
+    q.push(root);
+    while(q.size()){
+         fnc(q.front(), q,res);
+        q.pop();
+    }
+     
+    return res;
+}

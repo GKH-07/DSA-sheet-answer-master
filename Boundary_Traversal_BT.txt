@@ -1,0 +1,90 @@
+class Solution {
+public:
+    bool isLeaf(Node* temp){
+        if(!temp->left && !temp->right)
+            return true;
+        else
+            return false;
+    }
+    void leftBoundary(Node* root,vector<int>& res)
+    {
+        Node* curr = root->left;
+        while(curr)
+        {
+            if(!isLeaf(curr))
+            {
+                res.push_back(curr->data);
+            }
+            if(curr->left)
+            {
+                curr = curr->left;
+            }
+            else
+            {
+                curr=curr->right;
+            }
+        }
+    }
+    void leafNodes(Node* root,vector<int>& res)
+    {
+        if(isLeaf(root))
+        {
+            res.push_back(root->data);
+            return;
+        }
+        if(root->left)
+            leafNodes(root->left,res);
+        if(root->right)
+            leafNodes(root->right,res);
+            
+            
+    }
+    // right boundary on reverse order
+    void rightBoundary(Node* root,vector<int>& res)
+    {
+        Node* curr = root->right;
+        //stack<int> temp;
+        vector<int> temp;
+        while(curr)
+        {
+             if(!isLeaf(curr))
+            {
+                temp.push_back(curr->data);
+            }
+            if(curr->right)
+            {
+                curr = curr->right;
+            }
+            else
+            {
+                curr=curr->left;
+            }
+
+            // for(int i=0;i<temp.size();i++)
+            // {
+            //     res.push_back(temp.top());
+            //     temp.pop();
+            // }
+          
+        }
+          for(int i=temp.size()-1;i>=0;--i)
+            {
+                res.push_back(temp[i]);
+            }
+    }
+    
+    vector<int> boundary(Node *root)
+    {
+        vector<int> res;
+        if(!root) 
+            return res;
+        if(!isLeaf(root))
+            res.push_back(root->data);
+        leftBoundary(root,res);
+        leafNodes(root,res);
+        rightBoundary(root,res);
+        
+        return res;
+        
+    }
+};
