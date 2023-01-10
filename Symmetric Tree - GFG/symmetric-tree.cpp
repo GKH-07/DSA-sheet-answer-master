@@ -104,7 +104,9 @@ class Solution{
     // return true/false denoting whether the tree is Symmetric or not
     bool solve(struct Node* root1,struct Node* root2)
     {
-        if(root1==NULL && root2==NULL)return root1 == root2;
+        if(root1==NULL && root2==NULL)
+            return true;//root1 == root2;
+            
         if(root1 && root2 && root1->data == root2->data)
         {
             return solve(root1->left,root2->right) && solve(root1->right,root2->left);
