@@ -43,10 +43,14 @@ vector<long long>printFirstNegativeInteger(long long int A[],long long int N,lon
             }
             else if(j-i+1 == K)
             {
-                if(!q.empty() && q.front() < 0)//v.push_back(0);
+            
+                if(!q.empty())// && q.front() < 0)
                 v.push_back(q.front());
                 else v.push_back(0);
-                 if(A[i] <0)//== q.front())
+                
+                
+                
+                 if(A[i] <0)
                 {
                     q.pop();
                 }
