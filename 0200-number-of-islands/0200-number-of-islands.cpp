@@ -1,32 +1,34 @@
 class Solution {
-public:
-    int vis[301][301] ={0};
-    bool check(vector<vector<char>>& grid,int i,int j,int m,int n){
-        // base case
-        if(i<0 or j<0 or i>=m or j>=n or grid[i][j]=='0') return true;
-        // check if the index is alredy visited
-        if(vis[i][j]==1)return true;
-        // mark visited for "1"s
-        vis[i][j]=1;
-        bool u = check(grid,i-1,j,m,n); 
-        bool d = check(grid,i+1,j,m,n); 
-        bool r = check(grid,i,j-1,m,n); 
-        bool l = check(grid,i,j+1,m,n); 
-        if(u && d && r && l) return true;
-        return false;
+private:
+int rowdir[4] = {0,-1,0,1};
+int coldir[4] = {-1,0,1,0};
+void dfs(vector<vector<char>> &grid,vector<vector<int>>&vis,int row,int col)
+{
+    
+if(row<0 || col <0 || row >= grid.size() || col >= grid[0].size() || vis[row][col] == 1 || grid[row][col] != '1')
+    {
+        return;
     }
+    vis[row][col] = 1;
+    for(int k=0;k<4;k++)
+    {
+        dfs(grid,vis,row + rowdir[k],col+coldir[k]);
+    }
+}
+public:
     int numIslands(vector<vector<char>>& grid) {
-        int  count =0;
-        int m = grid.size();
-        int n = grid[0].size();
-        for(int i =0;i<m;i++){
-            for(int j=0;j<n;j++){
-                // check if index is not the part of any island(i.e. not visited) 
-                // check if index is not water
-                if(vis[i][j]==0 and grid[i][j] == '1'){
-                    bool ans = check(grid,i,j,m,n);
-                    // count 
-                    if(ans) count++;
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> vis(n,vector<int> (m,0));
+        int count=0;
+        for(int row=0;row<n;row++)
+        {
+            for(int col =0;col<m;col++)
+            {
+                if(vis[row][col] == 0 && grid[row][col] == '1')
+                {
+                    count++;
+                    dfs(grid,vis,row,col); 
                 }
             }
         }
