@@ -15,8 +15,11 @@ public:
         vector<vector<pair<int, int>>> adj(n + 1);
         vector<bool> vis(n + 1);
         for(auto edg: roads) {
-            adj[edg[0]].push_back({edg[1], edg[2]});
-            adj[edg[1]].push_back({edg[0], edg[2]});
+            int u = edg[0];
+            int v = edg[1];
+            int w = edg[2];
+            adj[u].push_back({v,w});
+            adj[v].push_back({u,w});
         }
 
         return dfs(1, adj, vis);
