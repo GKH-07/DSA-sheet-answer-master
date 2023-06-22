@@ -6,42 +6,48 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    string longestPalin (string S) {
-        // code here
+    string longestPalin (string s) 
+    {
          string result="";
-        int high;
-        int low=0;
-        int start=0;
-        int maxlength=1;
-        int n=S.size();
-        for(int i=1;i<n;i++){
-            //even length
-            low=i-1;
-            high=i;
-            while(low>=0 && high<n && S[low]==S[high]){
-                if(high-low+1>maxlength){
-                    start=low;
-                    maxlength=high-low+1;
-                }
-                low--;
-                high++;
-            }
-            //odd length
-            low=i-1;
-            high=i+1;
-            while(low>=0 && high<n && S[low]==S[high]){
-                if(high-low+1>maxlength){
-                    start=low;
-                    maxlength=high-low+1;
-                }
-                low--;
-                high++;
-            }
-        }
-        for(int i=start;i<start+maxlength;i++){
-            result=result+S[i];
-        }
-        return result;
+         int high;
+         int low=0;
+         int start=0;
+         int maxlength=1;
+         int n = s.size();
+         for(int i=1;i<n;i++)
+         {
+             // abba-even length
+             low = i-1;
+             high= i;
+             while(low>=0 && high<n && s[low] == s[high])
+             {
+                 if(maxlength < high - low+1)
+                 {
+                     start = low;
+                     maxlength=high-low+1;
+                 }
+                 low--;
+                 high++;
+             }
+             low = i-1;
+             high= i+1;
+             while(low>=0 && high<n && s[low] == s[high])
+             {
+                 if(maxlength < high - low+1)
+                 {
+                     start = low;
+                     maxlength=high-low+1;
+                 }
+                 low--;
+                 high++;
+             }
+             
+         }
+         for(int i=start;i<start+maxlength;i++)
+         {
+             result += s[i];
+         }
+         return result;
     }
 };
 
