@@ -18,13 +18,14 @@ class Solution{
                if(arr1[i]>arr2[j])
                {
                    swap(arr1[i],arr2[j]);
+                    i--;
+                j++;
                }
                else
                {
                    break;
                }
-                i--;
-                j++;
+               
            }
            
            sort(arr1,arr1+n);
