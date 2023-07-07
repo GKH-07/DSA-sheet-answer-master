@@ -12,15 +12,21 @@ class Solution{
            int i = n-1;
            int j=0;
            int loop = min(n,m);
+           
            for(int x=0;x<loop;x++)
            {
                if(arr1[i]>arr2[j])
                {
                    swap(arr1[i],arr2[j]);
                }
+               else
+               {
+                   break;
+               }
                 i--;
                 j++;
            }
+           
            sort(arr1,arr1+n);
            sort(arr2,arr2+m);
         } 
